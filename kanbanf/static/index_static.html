@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <title>Kanbanf</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="app">
+      <h1 id="title">KANBANF</h1>
+      <div id="projects">
+        <div class="project">KANBANF</div>
+        <div class="project">MEEPLE LOGO</div>
+        <div class="project">BOARDGAME</div>
+        <div class="project">EXTREMELY LONG PROJECT NAMEEEEEE</div>
+        <div class="project" id="add-project">+</div>
+      </div>      
+      <div id="board">
+        <div id="lanes">
+          <div class="lane" id="TODO">
+            <h2>TO-DO</h2>
+            <div class="tasks">
+              <div class="task">
+                Git and github(push first version)
+              </div>              
+              <div class="task">
+                Send back a json list of projects, after having inserted them in the app?)
+              </div>
+              <div class="task">
+                Authentication
+              </div>
+            </div>
+          </div>
+          <div class="lane" id="DOING">
+            <h2>DOING</h2>
+            <div class="tasks">
+              <div class="task">
+                FRONTEND
+                <span class="subtask" ><input type="checkbox" name="1" value="y">Finish plain html as an example</span>
+                <span class="subtask" ><input type="checkbox" name="2" value="y">Use react to display the example html</span>
+                <span class="subtask" ><input type="checkbox" name="3" value="y">React testing? tdd?</span>
+                <span class="subtask" ><input type="checkbox" name="4" value="y">Get data from the backend (use TDD to test if the backed is working)</span>
+              </div>              
+              <div class="task">
+                
+              </div>
+            </div>
+          </div>
+          <div class="lane" id="DONE">
+            <h2>DONE</h2>
+            <div class="tasks">
+              <div class="task">
+                Database setup
+              </div>              
+            </div>              
+          </div>
+        </div>
+      <div id="board">
+    </div>
+    <script src="/static/react/react.js"></script>
+    <script src="/static/react/react-dom.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

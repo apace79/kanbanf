@@ -1,0 +1,44 @@
+* slide di un corso di frontend development molto completo:
+  -- http://frontend.turing.io/lessons/
+* javascript
+  -- service workers:
+    - scrivere un service worker di prova per:
+     -- testare recupero cache
+     -- fare background sync
+* react:
+  -- aggiunta progetti:
+    * salvare lo stato in redux, farlo funzionare senza connessione con dati di redux salvati da qualche parte nel browser? a che serve il webworker?
+  -- cancellazione progetti  
+  -- mostrare anche le colonne e i task, con json statico
+  -- recuperare dal back-end i task
+* frontend:
+  -- finish plain html as an example:
+    * header non riempie la pagina quando riduco molto e scrollo sulla destra
+  -- use react to display the example html
+  -- react testing? tdd? try jest
+  -- get data from the backend (use TDD to test if the backed is working)
+* git and github(push first version)
+* TDD:
+  -- write next step in application (e.g. send back a json list of projects, after having inserted them in the app?)
+* Database: iniziare con SQLite3?
+  - SQLAlchemy:
+    -- ORM
+    -- senza ORM
+    -- flask-migrate (alembic)	
+* configuration:
+  -- read 
+     http://flask.pocoo.org/docs/0.12/config/#config-dev-prod 
+     for tips
+  -- instance directory/instance
+* caching
+* authentication
+* containers
+* cloud
+* REST:
+  -- usare qualche estensione rest di flask? django rest framework?
+* jobs?
+  (celery and redis)
+* logs:
+  -- sentry
+* amazon lambda?
+* cloud db? firebase o simili?
