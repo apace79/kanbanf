@@ -35,15 +35,15 @@ class DatabaseTests(unittest.TestCase):
             os.remove(self.app.config['DATABASE'])
 
     def test_empty_projects(self):
-        with db.execute(self.app, 'select * from projects') as c:
-            self.assertIsNone(c.fetchone())
+        r = db.execute(self.app, 'select * from projects', pp=list)
+        self.assertEqual(len(r), 0)
 
     def test_add_projects(self):
         p = db.Projects(self.app)
         name = ''.join(random.choices(string.ascii_uppercase, k=6))
         id = p.add((name,))
-        c = db.execute(self.app, 'select * from projects')
-        self.assertEqual((id, name), c[0])
+        r = db.execute(self.app, 'select * from projects', pp=list)
+        self.assertEqual((id, name), r[0])
 
     def test_get_projects(self):
         p = db.Projects(self.app)
@@ -62,22 +62,23 @@ class DatabaseTests(unittest.TestCase):
 
 class APITests(unittest.TestCase):
     def setUp(self):
-        self.db_fd, app.config['DATABASE'] = tempfile.mkstemp()
-        app.testing = True
-        self.app = app.test_client()
-        db.init(app)
+        self.app = create_app()
+        self.db_fd, self.app.config['DATABASE'] = tempfile.mkstemp()
+        self.app.testing = True
+        self.tc_app = self.app.test_client()
+        db.init(self.app)
 
     def tearDown(self):
         os.close(self.db_fd)
-        os.remove(app.config['DATABASE'])
+        os.remove(self.app.config['DATABASE'])
 
     def test_index(self):
-        response = self.app.get('/', content_type='html/text')
+        response = self.tc_app.get('/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, b'Hello, World!')
 
     def test_empty_projects(self):
-        response = self.app.get('/projects/', content_type='application/json')
+        response = self.tc_app.get('/projects/', content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.decode('UTF-8').rstrip(),
                          json.dumps(dict()))
@@ -88,7 +89,7 @@ class APITests(unittest.TestCase):
     def test_get_one_project(self):
         test_dict = {'name': 'test'}
         # insert_project(self.app, test_dict)
-        response = self.app.get('/projects/', content_type='application/json')
+        response = self.tc_app.get('/projects/', content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data.decode('UTF-8').rstrip(),
                          json.dumps(test_dict))

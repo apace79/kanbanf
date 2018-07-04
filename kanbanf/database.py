@@ -12,13 +12,13 @@ def connection(app):
     return sqlite3.connect(app.config['DATABASE'])
 
 
-def execute(app, stmt, data=(), pp=list):
+def execute(app, stmt, data=(), pp=(lambda x: x)):
     with connection(app) as conn:
         return pp(conn.execute(stmt, data))
 
 
 def query(app, stmt, data=()):
-    return execute(app, stmt, data)
+    return execute(app, stmt, data, list)
 
 
 class Projects():
@@ -32,10 +32,9 @@ class Projects():
         def get_lastrowid(c):
             return c.lastrowid
 
-        execute()
-        return conn.execute(self.app, q, select, data)
+        return execute(self.app, q, data, get_lastrowid)
 
         # return execute(self.app, 'SELECT last_insert_rowid()')
 
     def get_all(self):
-        return execute(self.app)
+        return execute(self.app, 'select * from projects', pp=list)
